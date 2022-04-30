@@ -21,8 +21,14 @@ function Util.CompleteDestroy()
             v:Destroy()
         end
     end
-    for i, connection in pairs(getconnections(Input.InputBegan)) do
-        connection:Disable()
+    for i, v in ipairs(getconnections(game:GetService('UserInputService').InputBegan)) do
+        local f = v.Function
+        if (f) then
+            local scr = getfenv(f).script
+            if (not scr:IsDescendantOf(game.CoreGui)) then 
+                v:Disable() 
+            end
+        end
     end
 end
 local is = function(delta,alpha)

@@ -127,7 +127,9 @@ function pause(wait)
         end
     end)
 end
-
+function Library.ToggleUI()
+    CoreGui["april_lib_4"].Enabled = not CoreGui['april_lib_4'].Enabled
+end
 Util.CompleteDestroy()
 function Library.Init(options)
     options = options or {}
@@ -899,6 +901,19 @@ local check = true
                     TweenService:Create(Orientation,TweenInfo.new(.25),{Rotation = 0}):Play()                
                 end
                 end)
+                function dropfunctions:Refresh(options)
+                    local l = options.Items or {}
+                    if not l then l = {} end 
+                    if not is(l,"table") then l = {} end 
+
+                    for i,v in pairs(DropdownContainer:GetChildren()) do
+                            if v:IsA("TextButton") and v.Name ~= "Btn" then
+                                v:Destroy()
+                            end
+                    end
+                    genItems(l)
+                end
+                return dropfunctions
             end
             function Elements:NewSlider(options)
 
@@ -1188,6 +1203,6 @@ end)
                 return Sections
             end 
             return Tabs
-        end
+end
 warn("xa1lt was here ⚔")
 return Library

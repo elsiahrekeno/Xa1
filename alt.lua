@@ -233,7 +233,7 @@ function Library.Init(options)
             Cover.Size = UDim2.new(0, 605, 0, 7)
 
             Title1.Name = "Title1"
-            Title1.Parent = game.StarterGui.Main.Motherframe.Header
+            Title1.Parent = Header
             Title1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             Title1.BackgroundTransparency = 1.000
             Title1.Size = UDim2.new(0, 61, 0, 38)
@@ -243,14 +243,14 @@ function Library.Init(options)
             Title1.TextSize = 15.000
                         
             BorderFrame.Name = "BorderFrame"
-            BorderFrame.Parent = game.StarterGui.Main.Motherframe.Header
+            BorderFrame.Parent = Header
             BorderFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
             BorderFrame.BorderSizePixel = 0
             BorderFrame.Position = UDim2.new(0, 62, 0, 7)
             BorderFrame.Size = UDim2.new(0, 2, 0, 23)
 
             TabContainer.Name = "TabContainer"
-            TabContainer.Parent = game.StarterGui.Main.Motherframe.Header
+            TabContainer.Parent = Header
             TabContainer.Active = true
             TabContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             TabContainer.BackgroundTransparency = 12.000

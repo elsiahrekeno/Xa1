@@ -1021,6 +1021,7 @@ function Library.Init(options)
                             local oldSliderDef = math.clamp(SliderInt.Text, minvalue, maxvalue) or math.clamp(50, minvalue, maxvalue)
                             local oldDefaultScale =  (oldSliderDef - minvalue) / (maxvalue - minvalue)
                             TweenService:Create(SliderBack, TweenInfo.new(0.15), {Size = UDim2.fromScale(oldDefaultScale, 1)}):Play()
+								pcall(callback, numb)
                           end
                     end  
                 end)

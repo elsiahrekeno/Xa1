@@ -853,6 +853,12 @@ function Library.Init(options)
                     TweenService:Create(DropdownContainer,TweenInfo.new(.23), {Size =  UDim2.new(0, 500, 0, 38 )}):Play()
                     TextBox.Text = droptitle .. " - " .. DropItem.Text
                     Dropped = false 
+							  for i,v in pairs(DropdownContainer:GetChildren()) do
+                        if v:IsA("TextButton") and v.Name ~= "Btn" and v.Name ~= "DropdownContainer" and v.Name ~= "TB" then
+                                    v.Visible = true 
+
+                        end
+                    end
                 end)
                 end
                 for i,v in next, list do

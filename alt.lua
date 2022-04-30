@@ -960,7 +960,8 @@ function Library.Init(options)
                 SliderTitle.TextColor3 = Color3.fromRGB(200, 200, 200)
                 SliderTitle.TextSize = 14.000
                 SliderTitle.TextXAlignment = Enum.TextXAlignment.Left
-
+		SliderTitle.Text = slidertitle
+				
                 SliderInt.Name = "SliderInt"
                 SliderInt.Parent = SliderContainer
                 SliderInt.BackgroundColor3 = Color3.fromRGB(255, 255, 255)

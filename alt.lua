@@ -241,7 +241,8 @@ function Library.Init(options)
             Title1.Text = "<font color= \"rgb(240, 101, 54)\">L</font>-<font color= \"rgb(240, 101, 54)\">JAX</font>"
             Title1.TextColor3 = Color3.fromRGB(255, 255, 255)
             Title1.TextSize = 15.000
-                        
+            Title1.RichText = true 
+            
             BorderFrame.Name = "BorderFrame"
             BorderFrame.Parent = Header
             BorderFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)

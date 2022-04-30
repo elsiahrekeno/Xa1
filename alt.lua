@@ -895,7 +895,7 @@ function Library.Init(options)
                 local maxvalue = options.Max or 1000
                 local callback = options.Callback or function() end 
                 local default = options.Default 
-                if not default then default = 0 end 
+                if not default then default = minvalue end 
                 if not slidertitle then
                     slidertitle = 'New Dropdown'
                 end

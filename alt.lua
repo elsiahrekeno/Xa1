@@ -744,7 +744,7 @@ function Library.Init(options)
                 local UICorner_2 = Instance.new("UICorner")
                 local Orientation = Instance.new("ImageButton")
                 local Shadow = Instance.new("ImageLabel")
-                local TextBox = Instance.new("TextBox")
+                local TextBox = Instance.new("TextLabel")
                 local UIPadding = Instance.new("UIPadding")
                 local f = Instance.new("UIListLayout")
                 
@@ -804,9 +804,7 @@ function Library.Init(options)
                 TextBox.Position = UDim2.new(0.0160000194, 0, 0, 0)
                 TextBox.Size = UDim2.new(0, 298, 0, 38)
                 TextBox.Font = Enum.Font.GothamSemibold
-                TextBox.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
-                TextBox.PlaceholderText = droptitle
-                TextBox.Text = ""
+                TextBox.Text = droptitle
                 TextBox.TextColor3 = Color3.fromRGB(200, 200, 200)
                 TextBox.TextSize = 14.000
                 TextBox.TextXAlignment = Enum.TextXAlignment.Left
@@ -849,56 +847,17 @@ function Library.Init(options)
                 DropItem.MouseButton1Click:Connect(function()
                     pcall(callback, DropItem.Text)
                     TweenService:Create(Orientation, TweenInfo.new(.25), { Rotation = 0}):Play()
-                    TextBox.PlaceholderText = droptitle .. " - " .. DropItem.Text
+                    TextBox.Text = droptitle .. " - " .. DropItem.Text
                     TweenService:Create(DropdownContainer,TweenInfo.new(.23), {Size =  UDim2.new(0, 500, 0, 38 )}):Play()
                     TextBox.Text = droptitle .. " - " .. DropItem.Text
                     Dropped = false 
-							  for i,v in pairs(DropdownContainer:GetChildren()) do
-                        if v:IsA("TextButton") and v.Name ~= "Btn" and v.Name ~= "DropdownContainer" and v.Name ~= "TB" then
-                                    v.Visible = true 
-
-                        end
-                    end
                 end)
                 end
                 for i,v in next, list do
                     genItems(v)
                 end
 --UDim2.new(0, 500, 0, 38)
-local check = true 
-                local function update()
-                    local search = string.lower(TextBox.Text)
-                    for i,v in pairs(DropdownContainer:GetChildren()) do
-                        if v:IsA("TextButton") and v.Name ~= "Btn" and v.Name ~= "DropdownContainer" and v.Name ~= "TB" then
-                            if search ~= "" then
-                                local item = string.lower(v.Text)
-                                if string.find(item,search) then
-                                    v.Visible = true 
-                                    TweenService:Create(DropdownContainer,TweenInfo.new(.23), {Size =  UDim2.new(0, 500, 0, f.AbsoluteContentSize.Y + 10 )}):Play()
-                                else
-                                    v.Visible = false 
-                                end
-                            else
-                                v.Visible = true 
-                                    TweenService:Create(DropdownContainer,TweenInfo.new(.23), {Size =  UDim2.new(0, 500, 0, f.AbsoluteContentSize.Y + 10 )}):Play()
-                            end
-                        end
-                    end
-             end
-                    TextBox.Focused:Connect(function()
-                        if Dropped then
-                        TextBox.PlaceholderText = "..."
-                        end
-                    end)
 
-           
-                     TextBox.Changed:Connect(function()
-                        if Dropped then                        
-                         update()
-                        end
-                     end)
-                 
-            
                 Btn.MouseButton1Click:Connect(function()
                     if not Dropped then
                         Dropped = true 

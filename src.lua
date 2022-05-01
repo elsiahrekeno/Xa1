@@ -747,7 +747,7 @@ function Library.Init(options)
                 local UICorner_2 = Instance.new("UICorner")
                 local Orientation = Instance.new("ImageButton")
                 local Shadow = Instance.new("ImageLabel")
-                local TextBox = Instance.new("TextBox")
+                local TextBox = Instance.new("TextLabel")
                 local UIPadding = Instance.new("UIPadding")
                 local f = Instance.new("UIListLayout")
                 
@@ -807,9 +807,7 @@ function Library.Init(options)
                 TextBox.Position = UDim2.new(0.0160000194, 0, 0, 0)
                 TextBox.Size = UDim2.new(0, 298, 0, 38)
                 TextBox.Font = Enum.Font.GothamSemibold
-                TextBox.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
-                TextBox.PlaceholderText = droptitle
-                TextBox.Text = ""
+                TextBox.Text = droptitle
                 TextBox.TextColor3 = Color3.fromRGB(200, 200, 200)
                 TextBox.TextSize = 14.000
                 TextBox.TextXAlignment = Enum.TextXAlignment.Left
@@ -852,50 +850,14 @@ function Library.Init(options)
                 DropItem.MouseButton1Click:Connect(function()
                     pcall(callback, DropItem.Text)
                     TweenService:Create(Orientation, TweenInfo.new(.25), { Rotation = 0}):Play()
-                    TextBox.PlaceholderText = droptitle .. " - " .. DropItem.Text
-                    TweenService:Create(DropdownContainer,TweenInfo.new(.23), {Size =  UDim2.new(0, 500, 0, 38 )}):Play()
                     TextBox.Text = droptitle .. " - " .. DropItem.Text
+                    TweenService:Create(DropdownContainer,TweenInfo.new(.23), {Size =  UDim2.new(0, 500, 0, 38 )}):Play()
                     Dropped = false 
-                end)
+                	end)
                 end
                 for i,v in next, list do
                     genItems(v)
                 end
---UDim2.new(0, 500, 0, 38)
-local check = true 
-                local function update()
-                    local search = string.lower(TextBox.Text)
-                    for i,v in pairs(DropdownContainer:GetChildren()) do
-                        if v:IsA("TextButton") and v.Name ~= "Btn" and v.Name ~= "DropdownContainer" and v.Name ~= "TB" then
-                            if search ~= "" then
-                                local item = string.lower(v.Text)
-                                if string.find(item,search) then
-                                    v.Visible = true 
-                                    TweenService:Create(DropdownContainer,TweenInfo.new(.23), {Size =  UDim2.new(0, 500, 0, f.AbsoluteContentSize.Y + 10 )}):Play()
-                                else
-                                    v.Visible = false 
-                                end
-                            else
-                                v.Visible = true 
-                                    TweenService:Create(DropdownContainer,TweenInfo.new(.23), {Size =  UDim2.new(0, 500, 0, f.AbsoluteContentSize.Y + 10 )}):Play()
-                            end
-                        end
-                    end
-             end
-                    TextBox.Focused:Connect(function()
-                        if Dropped then
-                        TextBox.PlaceholderText = "..."
-                        end
-                    end)
-
-           
-                     TextBox.Changed:Connect(function()
-                        if Dropped then                        
-                         update()
-                        end
-                     end)
-                 
-            
                 Btn.MouseButton1Click:Connect(function()
                     if not Dropped then
                         Dropped = true 
@@ -998,7 +960,9 @@ local check = true
                 SliderTitle.TextColor3 = Color3.fromRGB(200, 200, 200)
                 SliderTitle.TextSize = 14.000
                 SliderTitle.TextXAlignment = Enum.TextXAlignment.Left
-
+		SliderTitle.Text = slidertitle
+				
+				
                 SliderInt.Name = "SliderInt"
                 SliderInt.Parent = SliderContainer
                 SliderInt.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1083,25 +1047,61 @@ local check = true
 
             end
             function Elements:NewLabel(options)
-                local title = string.upper(options.Title) or 'NEW LABEL'
+                local title = options.Title or 'NEW LABEL'
                 if not title then title = "NEW LABEL" end 
 
                 if not is(title, "string") then
                     title = 'NEW LABEL'
                 end
-                local lbl = Instance.new("TextLabel")
-                    lbl.Name = "lbl"
-                    lbl.Parent = SectionContainer
-                    lbl.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-                    lbl.BackgroundTransparency = 1.000
-                    lbl.BorderColor3 = Color3.fromRGB(27, 42, 53)
-                    lbl.Size = UDim2.new(0, 586, 0, 14)
-                    lbl.Font = Enum.Font.GothamBold
-                    lbl.Text = title
-                    lbl.TextColor3 = Color3.fromRGB(125, 125, 125)
-                    lbl.TextSize = 12.000
-                    lbl.TextXAlignment = Enum.TextXAlignment.Left
-                      
+				local ButtonContainer = Instance.new("Frame")
+				local Btn = Instance.new("TextLabel")
+				local UICorner = Instance.new("UICorner")
+				local UIPadding = Instance.new("UIPadding")
+				local Sample = Instance.new("ImageLabel")
+				local Shadow = Instance.new("ImageLabel")
+
+				ButtonContainer.Name = "ButtonContainer"
+				ButtonContainer.Parent = SectionContainer
+				ButtonContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				ButtonContainer.BackgroundTransparency = 1.000
+				ButtonContainer.BorderColor3 = Color3.fromRGB(27, 42, 53)
+				ButtonContainer.Size = UDim2.new(0, 500, 0, 38)
+
+				Btn.Name = "Btn"
+				Btn.Parent = ButtonContainer
+				Btn.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+				Btn.Size = UDim2.new(0, 500, 0, 38) 				Btn.Font = Enum.Font.GothamSemibold
+				Btn.Text = title
+				Btn.TextColor3 = Color3.fromRGB(200, 200, 200)
+				Btn.TextSize = 14.000
+				Btn.TextXAlignment = Enum.TextXAlignment.Left
+				Btn.ClipsDescendants = true 
+				
+				Shadow.Name = "Shadow"
+				Shadow.Parent = ButtonContainer
+				Shadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				Shadow.BackgroundTransparency = 1.000
+				Shadow.BorderColor3 = Color3.fromRGB(27, 42, 53)
+				Shadow.Position = UDim2.new(0, -15, 0, -15)
+				Shadow.Size = UDim2.new(1, 30, 1, 30)
+				Shadow.Image = "http://www.roblox.com/asset/?id=5554236805"
+				Shadow.ImageColor3 = Color3.fromRGB(47, 47, 47)
+				Shadow.ScaleType = Enum.ScaleType.Slice
+				Shadow.SliceCenter = Rect.new(23, 23, 277, 277)
+
+				Sample.Name = "Sample"
+				Sample.Parent = Btn
+				Sample.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				Sample.BackgroundTransparency = 1.000
+				Sample.Image = "http://www.roblox.com/asset/?id=4560909609"
+				Sample.ImageColor3 = Color3.fromRGB(75,75,75)
+				Sample.ImageTransparency = 0.600
+
+				UICorner.CornerRadius = UDim.new(0, 4)
+				UICorner.Parent = Btn
+
+				UIPadding.Parent = Btn
+				UIPadding.PaddingLeft = UDim.new(0, 8)
             end
             function Elements:NewKeybind(options)
                 options = options or {}

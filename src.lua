@@ -301,7 +301,6 @@ function Library.Init(options)
                 Page.BorderSizePixel = 0
                 Page.Position = UDim2.new(0, 0, 0.109333336, 0)
                 Page.Size = UDim2.new(0, 606, 0, 334)
-                Page.CanvasSize = UDim2.new(0, 0, 0.5, 0)
                 Page.ScrollBarThickness = 5
                 Page.ScrollBarImageColor3 = Color3.fromRGB(15,15,15)
 
@@ -365,7 +364,7 @@ function Library.Init(options)
                     local layout = Instance.new("UIListLayout")
                     local lbl = Instance.new("TextLabel")
 
-                SectionContainer.Name = "SectionContainer"
+                    SectionContainer.Name = "SectionContainer"
                     SectionContainer.Parent = Page
                     SectionContainer.Size = UDim2.new(0,500,0,38)
                     SectionContainer.BackgroundTransparency = 1 
@@ -389,10 +388,10 @@ function Library.Init(options)
                     layout.VerticalAlignment =Enum.VerticalAlignment.Top
                      layout.SortOrder = Enum.SortOrder.LayoutOrder
 
-
-                     spawn(function()
-                        SectionContainer.Size = UDim2.new(0,500,0,layout.AbsoluteContentSize.Y)
+                    layout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+                        TweenService:Create(SectionContainer,TweenInfo.new(.01),{Size = UDim2.new(0,538,0,layout.AbsoluteContentSize.Y)}):Play()
                     end)
+
                     local Elements = {} 
                 function Elements:NewButton(options)
                    options = options or {}
@@ -852,7 +851,8 @@ function Library.Init(options)
                     TweenService:Create(Orientation, TweenInfo.new(.25), { Rotation = 0}):Play()
                     TextBox.Text = droptitle .. " - " .. DropItem.Text
                     TweenService:Create(DropdownContainer,TweenInfo.new(.23), {Size =  UDim2.new(0, 500, 0, 38 )}):Play()
-                    Dropped = false 
+                    Dropped = false
+                 
                 	end)
                 end
                 for i,v in next, list do
@@ -861,12 +861,15 @@ function Library.Init(options)
                 Btn.MouseButton1Click:Connect(function()
                     if not Dropped then
                         Dropped = true 
-                        TweenService:Create(DropdownContainer,TweenInfo.new(.25),{Size = UDim2.new(0, 500, 0, f.AbsoluteContentSize.Y + 10)}):Play()
-                        TweenService:Create(Orientation,TweenInfo.new(.25),{Rotation = 180}):Play()          
+                        TweenService:Create(DropdownContainer,TweenInfo.new(.25),{Size = UDim2.new(0, 500, 0, f.AbsoluteContentSize.Y)}):Play()
+                        TweenService:Create(Orientation,TweenInfo.new(.25),{Rotation = 180}):Play() 
+              
+         
                         elseif Dropped then
                     Dropped = false 
                     TweenService:Create(DropdownContainer,TweenInfo.new(.25),{Size = UDim2.new(0, 500, 0, 38)}):Play()
-                    TweenService:Create(Orientation,TweenInfo.new(.25),{Rotation = 0}):Play()                
+                    TweenService:Create(Orientation,TweenInfo.new(.25),{Rotation = 0}):Play()  
+             
                 end
                 end)
                 function dropfunctions:Refresh(options)
@@ -1210,5 +1213,5 @@ end)
             end 
             return Tabs
 end
-warn("xa1lt was here ⚔")
+warn("xa1lt was here (when the dropdown don't work like it used to no mo) ⚔")
 return Library
